@@ -1,0 +1,61 @@
+<div class="wrapper">
+<h2>Credentials</h2>
+<div class="example-container">
+  <div
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="todo"
+    [cdkDropListConnectedTo]="[doneList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box big" *ngFor="let item of todo" id="{{item.id}}" cdkDrag>
+      <div class="header" cdkDragHandle (click)="toggle(item.id)">
+        <div fxFlex="75%">{{item.title}}
+          <div class="subtitle">{{item.subtitle}}</div>
+        </div>
+        <div fxFlex="25%">
+          <i class="material-icons">add_circle</i>
+          <i class="material-icons">list</i>
+          <i class="material-icons">settings</i>
+          <i class="material-icons" *ngIf="item.big">keyboard_arrow_up</i>
+         <i class="material-icons" *ngIf="!item.big">keyboard_arrow_down</i>
+       </div>
+      </div>
+      <div class="body" [innerHTML]="item.content"></div>
+    </div>
+  </div>
+</div>
+
+<div class="example-container">
+
+  <div
+    cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="done"
+    [cdkDropListConnectedTo]="[todoList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box big" *ngFor="let item of done" id="{{item.id}}" cdkDrag (click)="toggle(item.id)">
+      <div class="header">
+        <div fxFlex="75">{{item.title}}
+          <div class="subtitle">{{item.subtitle}}</div>
+        </div>
+        <span>
+          <i class="material-icons">add_circle</i>
+          <i class="material-icons">list</i>
+          <i class="material-icons">settings</i>
+          <i class="material-icons" *ngIf="item.big">keyboard_arrow_up</i>
+         <i class="material-icons" *ngIf="!item.big">keyboard_arrow_down</i>
+       </span>
+      </div>
+      <div class="body" [innerHTML]="item.content">
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- Copyright 2019 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
